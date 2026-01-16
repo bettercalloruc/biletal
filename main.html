@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversation Club – Bilet Al</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: #020617;
+      max-width: 420px;
+      width: 90%;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #e5e7eb;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-left: 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .lang-switch button.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: white;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #e5e7eb;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #22c55e;
+      color: #022c22;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .description {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: #cbd5f5;
+      margin-bottom: 18px;
+    }
+
+    .features {
+      margin-bottom: 20px;
+      padding-left: 18px;
+    }
+
+    .features li {
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #e2e8f0;
+    }
+
+    .price-box {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      color: #22c55e;
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(90deg, #3b82f6, #6366f1);
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 6px 20px rgba(59,130,246,0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(99,102,241,0.5);
+    }
+
+    .payment-box {
+      display: none;
+      margin-top: 20px;
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .payment-box h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #e5e7eb;
+    }
+
+    .payment-row {
+      margin-bottom: 10px;
+      font-size: 14.5px;
+      color: #e2e8f0;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #93c5fd;
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #a5b4fc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="lang-switch">
+      <button id="btnAZ" class="active" onclick="setLanguage('az')">AZ</button>
+      <button id="btnEN" onclick="setLanguage('en')">EN</button>
+    </div>
+
+    <span class="badge" id="badgeText">Hər həftə sonu</span>
+    <h1 id="titleText">Conversation Club</h1>
+    <p class="description" id="descriptionText">
+      Conversation Club ingilis dilində sərbəst danışmaq, özünə inamı artırmaq və yeni insanlarla
+      əlaqə qurmaq istəyənlər üçün yaradılmış interaktiv müzakirə mühitidir. Hər görüş praktik
+      tapşırıqlar, debatlar və real həyat mövzuları üzərində qurulur.
+    </p>
+
+    <ul class="features" id="featuresList">
+      <li>✔ Canlı müzakirələr və oyun formatlı tapşırıqlar</li>
+      <li>✔ Yeni dostluqlar və networking fürsəti</li>
+      <li>✔ Real danışıq təcrübəsi və düzəlişlər</li>
+      <li>✔ Rahat və motivasiyaedici mühit</li>
+    </ul>
+
+    <div class="price-box">
+      <div id="priceLabel">Bilet qiyməti</div>
+      <div class="price">5 AZN</div>
+    </div>
+
+    <button class="btn" id="buyButton" onclick="showPayment()">Bilet al</button>
+
+    <div class="payment-box" id="paymentBox">
+      <h3 id="paymentTitle">Ödəniş Məlumatları</h3>
+      <div class="payment-row"><span class="highlight" id="cardLabel">Kart nömrəsi:</span> 4169 7388 2193 2781</div>
+      <div class="payment-row"><span class="highlight" id="ownerLabel">Kart sahibi:</span> Orucəli Əsgərov</div>
+      <div class="payment-row"><span class="highlight" id="phoneLabel">Telefon / WhatsApp:</span> +994 50 523 34 96</div>
+      <div class="note" id="noteText">
+        Ödənişi etdikdən sonra zəhmət olmasa qəbzin şəklini WhatsApp vasitəsilə göndərin.
+        Ödəniş təsdiqləndikdən sonra adınız iştirak siyahısına əlavə olunacaq.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPayment() {
+      document.getElementById("paymentBox").style.display = "block";
+      document.getElementById("buyButton").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function setLanguage(lang) {
+      const isAZ = lang === "az";
+
+      document.getElementById("btnAZ").classList.toggle("active", isAZ);
+      document.getElementById("btnEN").classList.toggle("active", !isAZ);
+
+      document.getElementById("badgeText").textContent = isAZ ? "Hər həftə sonu" : "Every weekend";
+      document.getElementById("titleText").textContent = "Conversation Club";
+
+      document.getElementById("descriptionText").textContent = isAZ
+        ? "Conversation Club ingilis dilində sərbəst danışmaq, özünə inamı artırmaq və yeni insanlarla əlaqə qurmaq istəyənlər üçün yaradılmış interaktiv müzakirə mühitidir. Hər görüş praktik tapşırıqlar, debatlar və real həyat mövzuları üzərində qurulur."
+        : "Conversation Club is an interactive speaking environment designed for those who want to speak English confidently, build self-confidence, and connect with new people. Each session is built around practical activities, debates, and real-life topics.";
+
+      document.getElementById("featuresList").innerHTML = isAZ
+        ? "<li>✔ Canlı müzakirələr və oyun formatlı tapşırıqlar</li><li>✔ Yeni dostluqlar və networking fürsəti</li><li>✔ Real danışıq təcrübəsi və düzəlişlər</li><li>✔ Rahat və motivasiyaedici mühit</li>"
+        : "<li>✔ Live discussions and game-based activities</li><li>✔ New friendships and networking opportunities</li><li>✔ Real speaking practice and feedback</li><li>✔ Comfortable and motivating environment</li>";
+
+      document.getElementById("priceLabel").textContent = isAZ ? "Bilet qiyməti" : "Ticket price";
+      document.getElementById("buyButton").textContent = isAZ ? "Bilet al" : "Buy ticket";
+
+      document.getElementById("paymentTitle").textContent = isAZ ? "Ödəniş Məlumatları" : "Payment Details";
+      document.getElementById("cardLabel").textContent = isAZ ? "Kart nömrəsi:" : "Card number:";
+      document.getElementById("ownerLabel").textContent = isAZ ? "Kart sahibi:" : "Cardholder:";
+      document.getElementById("phoneLabel").textContent = isAZ ? "Telefon / WhatsApp:" : "Phone / WhatsApp:";
+      document.getElementById("noteText").textContent = isAZ
+        ? "Ödənişi etdikdən sonra zəhmət olmasa qəbzin şəklini WhatsApp vasitəsilə göndərin. Ödəniş təsdiqləndikdən sonra adınız iştirak siyahısına əlavə olunacaq."
+        : "After completing the payment, please send a screenshot of the receipt via WhatsApp. Once the payment is confirmed, your name will be added to the participant list.";
+    }
+  </script>
+
+</body>
+</html>
